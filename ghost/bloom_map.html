@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🌸 Node Bloom</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🌸 Node Bloom</h1><pre id='out'></pre><script>
+const b = JSON.parse(localStorage.getItem('brimos_blooms') || '[]');
+document.getElementById('out').innerText = b.map(x => `[${x.time}] ${x.id}`).join('\n') || 'No bloom triggered.';
+</script></body></html>

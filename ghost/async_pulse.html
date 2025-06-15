@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🔁 Async Ping</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🔁 Async Ping</h1><pre id='ping'></pre><script>
+const p = JSON.parse(localStorage.getItem('brimos_async_ping') || '{}');
+document.getElementById('ping').innerText = p.id || 'No ping.';
+</script></body></html>
