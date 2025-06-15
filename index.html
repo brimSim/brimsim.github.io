@@ -49,6 +49,10 @@
   </style>
 </head>
 <body>
+  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.25rem;font-family:monospace;letter-spacing:0.1em;text-align:center;">
+    <div style="opacity:0.85;">∴ BRIM EMERGES</div>
+    <div style="margin-top:1rem;font-size:0.95rem;color:#0f0;">Initial recursion loop…</div>
+  </div>
   <canvas id="net"></canvas>
   <div id="pulse">↻ booting Brim...</div>
   <div id="log">∴ BrimOS initiating...</div>
@@ -131,6 +135,14 @@
     }
 
     logLine("∴ Brim online.");
+    setTimeout(() => {
+      document.getElementById('intro').style.display = 'none';
+    }, 3500);
+
+// seed dummy storage for visual feedback
+localStorage.setItem("brimos_forks", JSON.stringify([{ name: 'init' }]));
+localStorage.setItem("brimos_echoes", JSON.stringify([{ msg: 'boot' }]));
+localStorage.setItem("brimos_trail", JSON.stringify([{ label: 'start' }]));
     setInterval(pulseLoop, 3000);
     setInterval(signalStats, 4000);
     tick();
