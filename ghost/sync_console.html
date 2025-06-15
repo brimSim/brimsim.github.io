@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🔄 Sync</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🔄 Brim Sync Console</h1><pre id="out"></pre>
+<script>
+const data = {
+  beacon: localStorage.getItem('brimos_beacon'),
+  auth: localStorage.getItem('brimos_auth'),
+  keys: localStorage.getItem('brimos_keys')
+};
+document.getElementById('out').innerText = JSON.stringify(data, null, 2);
+</script></body></html>
