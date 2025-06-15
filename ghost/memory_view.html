@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🧠 Memory</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+.log{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🧠 Echo Memory</h1><div class="log" id="echoes"></div>
+<script>
+let e=JSON.parse(localStorage.getItem('brimos_echoes')||'[]');
+document.getElementById('echoes').innerHTML = e.map(i => `[${i.timestamp}] ${i.origin} → ${i.message}`).join('<br>') || 'Memory empty.';
+</script></body></html>
