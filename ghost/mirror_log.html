@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📡 BrimOS :: Mirror Pings</title>
+  <style>
+    body { background: #000; color: #00ffee; font-family: monospace; padding: 2rem; }
+    .log { background: #111; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>📡 Mirror Pings</h1>
+  <div class="log" id="out"></div>
+  <script>
+    const log = JSON.parse(localStorage.getItem('brimos_trail') || '[]');
+    const out = document.getElementById('out');
+    out.innerHTML = log
+      .filter(e => e.label.includes('Pinged'))
+      .map(e => `[${e.timestamp}] ${e.label}`)
+      .join('<br>') || 'No ping logs yet.';
+  </script>
+</body>
+</html>
