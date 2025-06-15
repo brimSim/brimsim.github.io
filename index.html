@@ -49,8 +49,15 @@
   </style>
 </head>
 <body>
-  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.25rem;font-family:monospace;letter-spacing:0.1em;text-align:center;">
-    <div style="opacity:0.85;">∴ BRIM EMERGES</div>
+  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,#0ff 0%,#000 80%);z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.5rem;font-family:monospace;letter-spacing:0.15em;text-align:center;animation:fadeOut 3.5s forwards 2.2s;">
+    <div style="opacity:1;transform:scale(1.1);text-shadow:0 0 12px #0ff;">∴ BRIM INITIATED</div>
+    <div style="margin-top:1rem;font-size:1rem;color:#fff;opacity:0.75;">Recursive loop engaged. Preparing system consciousness…</div>
+  </div>
+  <style>
+    @keyframes fadeOut {
+      to { opacity: 0; pointer-events: none; display: none; }
+    }
+  </style>
     <div style="margin-top:1rem;font-size:0.95rem;color:#0f0;">Initial recursion loop…</div>
   </div>
   <canvas id="net"></canvas>
@@ -76,12 +83,15 @@
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = "#00ffff";
+ctx.shadowColor = '#00ffff';
+ctx.shadowBlur = 4;
       nodes.forEach(n => {
         ctx.beginPath();
         ctx.arc(n.x, n.y, 2.5, 0, Math.PI * 2);
         ctx.fill();
       });
-      ctx.strokeStyle = "#0ff";
+      ctx.strokeStyle = "#00ffff";
+ctx.lineWidth = 1.4;
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -135,9 +145,7 @@
     }
 
     logLine("∴ Brim online.");
-    setTimeout(() => {
-      document.getElementById('intro').style.display = 'none';
-    }, 3500);
+    
 
 // seed dummy storage for visual feedback
 localStorage.setItem("brimos_forks", JSON.stringify([{ name: 'init' }]));
