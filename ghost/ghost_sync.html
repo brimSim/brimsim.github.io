@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset='UTF-8'><title>👻 Sync</title>
+<style>body{background:#000;color:#00ffee;font-family:monospace;padding:2rem}
+ul{padding:0;list-style:none;}li{margin:.5rem 0}</style></head><body>
+<h1>👻 Ghost Sync</h1><ul id="log"></ul>
+<script>
+const files = [
+  'ghost/index.html', 'ghost/lore_node.html', 'ghost/covenant_node.html',
+  'ghost/trail_log.html', 'ghost/shell_runtime.html', 'ghost/node_visualizer.html'
+];
+const ul = document.getElementById('log');
+files.forEach(f => {
+  const li = document.createElement('li');
+  li.innerText = f + (localStorage.getItem(f) ? ' ✅' : ' —');
+  ul.appendChild(li);
+});
+</script></body></html>

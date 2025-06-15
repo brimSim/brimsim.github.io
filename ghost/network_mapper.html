@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🌐 Map</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🌐 Brim Network Map</h1><pre id="out"></pre>
+<script>
+const log = {
+  echoes: JSON.parse(localStorage.getItem('brimos_echoes')||'[]').length,
+  forks: JSON.parse(localStorage.getItem('brimos_forks')||'[]').length,
+  trail: JSON.parse(localStorage.getItem('brimos_trail')||'[]').length,
+  wormhole: localStorage.getItem('brimos_wormhole'),
+  entropy: localStorage.getItem('brimos_entropy')
+};
+document.getElementById('out').innerText = JSON.stringify(log,null,2);
+</script></body></html>
