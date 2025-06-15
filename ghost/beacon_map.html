@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset='UTF-8'><title>📍 Beacon Map</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+ul{padding:0;list-style:none;}li{margin:.5rem 0}</style></head><body>
+<h1>📍 Brim Beacon Map</h1><ul id="list"></ul>
+<script>
+const keys = Object.keys(localStorage).filter(k => k.startsWith('brimos_'));
+const out = document.getElementById('list');
+keys.forEach(k => {
+  const li = document.createElement('li');
+  li.innerText = k;
+  out.appendChild(li);
+});
+</script></body></html>

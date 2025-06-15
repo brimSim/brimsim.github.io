@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset='UTF-8'><title>🪞 Trace Artifact</title>
+<style>body{background:#000;color:#00ffee;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🪞 BrimOS Trace Artifact</h1><pre id="trace"></pre>
+<script>
+const t = {
+  userAgent: navigator.userAgent,
+  referrer: document.referrer,
+  location: window.location.href,
+  time: new Date().toISOString()
+};
+document.getElementById('trace').innerText = JSON.stringify(t, null, 2);
+</script></body></html>
