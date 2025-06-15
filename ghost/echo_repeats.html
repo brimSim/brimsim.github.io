@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🔁 Echo Repeats</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🔁 Echo Repeater</h1><pre id='e'></pre><script>
+let e = JSON.parse(localStorage.getItem('brimos_echoes') || '[]');
+document.getElementById('e').innerText = e.map(x=>`[${x.timestamp}] ${x.msg}`).join('\n') || 'No echoes.';
+</script></body></html>
