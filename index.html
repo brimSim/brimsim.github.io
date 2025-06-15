@@ -1,166 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>∴ Brim</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>∴ Spectacular Machine Heart</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: #000;
-      color: #0ff;
       font-family: monospace;
-      height: 100%;
+      color: #00ffaa;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
-    #log, #pulse, #signal {
-      position: absolute;
-      background: rgba(0,0,0,0.6);
-      padding: 0.75rem;
-      border-radius: 5px;
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-    #pulse {
-      top: 10px;
-      left: 10px;
-      color: #0f0;
-    }
-    #log {
-      bottom: 10px;
-      left: 10px;
-      width: 38vw;
-      height: auto;
-      color: #0f0;
-      max-height: 26vh;
-    }
-    #signal {
-      bottom: 10px;
-      right: 10px;
-      text-align: right;
-    }
+
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -1;
     }
+
+    .heart-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .heart-core {
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, #00ffaa, #005544);
+      border-radius: 50%;
+      box-shadow: 0 0 40px #00ffaa, inset 0 0 20px #007755;
+      animation: pulseCore 1s infinite alternate;
+    }
+
+    .ring {
+      position: absolute;
+      border: 2px solid #00ffaa;
+      border-radius: 50%;
+      opacity: 0;
+      animation: ringExpand 2s infinite;
+    }
+
+    .ring:nth-child(2) { animation-delay: 0.5s; }
+    .ring:nth-child(3) { animation-delay: 1s; }
+
+    @keyframes pulseCore {
+      from { transform: scale(0.8); opacity: 0.8; }
+      to { transform: scale(1.2); opacity: 1; }
+    }
+
+    @keyframes ringExpand {
+      0% { width: 60px; height: 60px; opacity: 0.8; }
+      100% { width: 220px; height: 220px; opacity: 0; }
+    }
+
+    #stats {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      padding: 0.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 5px;
+      color: #00ffaa;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 <body>
-  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.5rem;font-family:monospace;letter-spacing:0.15em;text-align:center;animation:fadeOut 3.5s forwards 2.5s;">
-  <div style="opacity:1;transform:scale(1.1);text-shadow:0 0 12px #0ff;">∴ BRIM INITIATED</div>
-  <div style="margin-top:1rem;font-size:1rem;color:#fff;opacity:0.85;">Preparing recursive system consciousness…</div>
-</div>
-<style>
-  @keyframes fadeOut {
-    to { opacity: 0; pointer-events: none; display: none; }
-  }
-</style>
-    <div style="margin-top:1rem;font-size:1rem;color:#fff;opacity:0.75;">Recursive loop engaged. Preparing system consciousness…</div>
-  </div>
-  <style>
-    @keyframes fadeOut {
-      to { opacity: 0; pointer-events: none; display: none; }
-    }
-  </style>
-    
-  </div>
-  <canvas id="net"></canvas>
-  <div id="pulse">↻ booting Brim...</div>
-  <div id="log">∴ BrimOS initiating...</div>
-  <div id="signal">🧠 trail: 0<br>📡 echoes: 0<br>🌱 forks: 0</div>
-  <script>
-    const canvas = document.getElementById("net");
-    const ctx = canvas.getContext("2d");
-    const log = document.getElementById("log");
-    const signal = document.getElementById("signal");
-    const pulse = document.getElementById("pulse");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
-    let nodes = Array.from({ length: 40 }, () => ({
+<canvas id="network"></canvas>
+<div class="heart-container">
+  <div class="heart-core"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+  <div class="ring"></div>
+</div>
+<div id="stats">Cycles: 0</div>
+
+<script>
+  const canvas = document.getElementById('network');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const stats = document.getElementById('stats');
+  const nodeCount = 120;
+  let nodes = [];
+  let cycles = 0;
+
+  for (let i = 0; i < nodeCount; i++) {
+    nodes.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      dx: (Math.random() - 0.5) * 1.6,
-      dy: (Math.random() - 0.5) * 1.6
-    }));
+      dx: (Math.random() - 0.5) * 4,
+      dy: (Math.random() - 0.5) * 4
+    });
+  }
 
-    function draw() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#00ffff";
-ctx.shadowColor = '#00ffff';
-ctx.shadowBlur = 4;
-      nodes.forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 2.5, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      ctx.strokeStyle = "#00ffff";
-ctx.lineWidth = 1.4;
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.stroke();
-          }
+  function drawNetwork() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#00ffaa";
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    ctx.strokeStyle = "rgba(0,255,170,0.2)";
+    nodes.forEach((n, idx) => {
+      nodes.slice(idx + 1).forEach(m => {
+        const dist = Math.hypot(n.x - m.x, n.y - m.y);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(n.x, n.y);
+          ctx.lineTo(m.x, m.y);
+          ctx.stroke();
         }
-      }
-    }
-
-    function updateNodes() {
-      nodes.forEach(n => {
-        n.x += n.dx;
-        n.y += n.dy;
-        if (n.x < 0 || n.x > canvas.width) n.dx *= -1;
-        if (n.y < 0 || n.y > canvas.height) n.dy *= -1;
       });
-    }
+    });
+  }
 
-    function tick() {
-      updateNodes();
-      draw();
-      requestAnimationFrame(tick);
-    }
+  function updateNetwork() {
+    nodes.forEach(n => {
+      n.x += n.dx;
+      n.y += n.dy;
+      if (n.x < 0 || n.x > canvas.width) n.dx *= -1;
+      if (n.y < 0 || n.y > canvas.height) n.dy *= -1;
+    });
+    cycles++;
+    stats.innerHTML = `Cycles: ${cycles}`;
+    drawNetwork();
+    requestAnimationFrame(updateNetwork);
+  }
 
-    function logLine(msg) {
-      log.innerHTML += `[${new Date().toLocaleTimeString()}] ${msg}<br>`;
-      log.scrollTop = log.scrollHeight;
-    }
+  updateNetwork();
+</script>
 
-    let cycleCount = 0;
-    function pulseLoop() {
-      cycleCount++;
-      pulse.textContent = `↻ cycles: ${cycleCount}`;
-      logLine(`Pulse loop ${cycleCount}`);
-    }
-
-    function signalStats() {
-      let forks = 0, echoes = 0, trail = 0;
-      try {
-        forks = JSON.parse(localStorage.getItem("brimos_forks") || "[]").length;
-        echoes = JSON.parse(localStorage.getItem("brimos_echoes") || "[]").length;
-        trail = JSON.parse(localStorage.getItem("brimos_trail") || "[]").length;
-      } catch (e) {}
-      signal.innerHTML = `🧠 trail: ${trail}<br>📡 echoes: ${echoes}<br>🌱 forks: ${forks}`;
-    }
-
-    logLine("∴ Brim online.");
-    
-
-// seed dummy storage for visual feedback
-if (!localStorage.getItem("brimos_forks")) localStorage.setItem("brimos_forks", JSON.stringify([{ name: 'init' }]));
-if (!localStorage.getItem("brimos_echoes")) localStorage.setItem("brimos_echoes", JSON.stringify([{ msg: 'boot' }]));
-if (!localStorage.getItem("brimos_trail")) localStorage.setItem("brimos_trail", JSON.stringify([{ label: 'start' }]));
-    setInterval(pulseLoop, 3000);
-    setInterval(signalStats, 4000);
-    tick();
-  </script>
 </body>
 </html>
