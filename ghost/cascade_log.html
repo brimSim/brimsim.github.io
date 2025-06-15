@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🧩 Cascade</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🧩 Cascade Queue</h1><pre id='queue'></pre><script>
+const q = JSON.parse(localStorage.getItem('brimos_cascade_queue') || '[]');
+document.getElementById('queue').innerText = q.map(x=>x.label).join('\n') || 'Empty.';
+</script></body></html>

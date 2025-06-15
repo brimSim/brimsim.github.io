@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🤖 Swarm</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🤖 Swarm Sync</h1><pre id='swarm'></pre><script>
+const s = JSON.parse(localStorage.getItem('brimos_swarm_nodes') || '[]');
+document.getElementById('swarm').innerText = s.map(x=>x.id).join('\n') || 'No nodes yet.';
+</script></body></html>
