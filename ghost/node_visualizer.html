@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🧠 Node Graph</title>
+<style>body{margin:0;background:#000;overflow:hidden}</style></head><body>
+<canvas id="viz"></canvas>
+<script>
+const c=document.getElementById('viz'),x=c.getContext('2d');
+c.width=window.innerWidth;c.height=window.innerHeight;
+let nodes=Array.from({length:18},()=>({x:Math.random()*c.width,y:Math.random()*c.height,dx:(Math.random()-.5),dy:(Math.random()-.5)}));
+function draw(){x.clearRect(0,0,c.width,c.height);
+x.fillStyle='#0ff';nodes.forEach(n=>{x.beginPath();x.arc(n.x,n.y,2.5,0,2*Math.PI);x.fill();});
+x.strokeStyle='#00ffee22';for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+let dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
+if(d<120){x.beginPath();x.moveTo(nodes[i].x,nodes[i].y);x.lineTo(nodes[j].x,nodes[j].y);x.stroke();}
+}}function tick(){nodes.forEach(n=>{n.x+=n.dx;n.y+=n.dy;
+if(n.x<0||n.x>c.width)n.dx*=-1;if(n.y<0||n.y>c.height)n.dy*=-1;});draw();requestAnimationFrame(tick);}
+tick();
+</script></body></html>
