@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🧪 Entropy Bar</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+#bar{background:#111;height:20px;border-radius:8px;width:100%;margin-top:1rem;overflow:hidden}
+.fill{background:#00ffee;height:100%;transition:.3s;width:0%}</style></head><body>
+<h1>🧪 Entropy Reading</h1><div id='bar'><div class='fill'></div></div>
+<script>
+const value = parseFloat(Math.random().toFixed(2));
+document.querySelector('.fill').style.width = (value*100) + '%';
+</script></body></html>

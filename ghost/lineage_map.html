@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🌿 Lineage Map</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🌿 Lineage Map</h1><pre id='out'></pre><script>
+const lineage = JSON.parse(localStorage.getItem('brimos_lineage') || '[]');
+document.getElementById('out').innerText = lineage.map(x => `[${x.time}] ${x.source} > ${x.branch}`).join('\n') || 'No lineage.';
+</script></body></html>

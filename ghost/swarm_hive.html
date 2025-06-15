@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🧠 Swarm</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🧠 BrimOS Swarm</h1><pre id='swarm'></pre><script>
+const swarm = JSON.parse(localStorage.getItem('brimos_swarm') || '[]');
+document.getElementById('swarm').innerText = JSON.stringify(swarm,null,2) || 'No swarm.';
+</script></body></html>
