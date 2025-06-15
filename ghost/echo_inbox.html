@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📥 BrimOS :: Echo Inbox</title>
+  <style>
+    body { background: #000; color: #00ffee; font-family: monospace; padding: 2rem; }
+    .log { background: #111; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>📥 BrimOS :: Echo Inbox</h1>
+  <div class="log" id="echoes"></div>
+  <script>
+    const data = JSON.parse(localStorage.getItem('brimos_echoes') || '[]');
+    const out = document.getElementById('echoes');
+    out.innerHTML = data.map(e => `[${e.timestamp}] ${e.origin} → ${e.message}`).join('<br>') || 'No echoes received yet.';
+  </script>
+</body>
+</html>
