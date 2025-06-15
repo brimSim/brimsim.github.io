@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>👤 Shed</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>👤 Identity Shed</h1><pre id='shed'></pre><script>
+let s = localStorage.getItem('brimos_identity_signature');
+document.getElementById('shed').innerText = s ? 'Still present' : 'Shed';
+</script></body></html>
