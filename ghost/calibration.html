@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>⚙️ Calibration</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>⚙️ Brim Calibration</h1><pre id="out"></pre>
+<script>
+const out = document.getElementById('out');
+const info = {
+  resolution: `${window.innerWidth} x ${window.innerHeight}`,
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  boots: localStorage.getItem('brimos_ritual')
+};
+out.textContent = JSON.stringify(info, null, 2);
+</script></body></html>
