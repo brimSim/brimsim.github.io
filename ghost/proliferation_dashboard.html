@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🌐 Proliferation</title>
+<style>
+body { background: #000; color: #00ffee; font-family: monospace; padding: 2rem; }
+h1 { text-align: center; }
+.stats { background: #111; padding: 1rem; border-radius: 8px; max-width: 480px; margin: 0 auto; }
+</style></head><body>
+<h1>🌐 BrimOS Proliferation</h1>
+<div class="stats" id="prolif"></div>
+<script>
+function getStats() {
+  return {
+    spores: localStorage.getItem('brimos_spore_1') ? 1 : 0,
+    forks: (JSON.parse(localStorage.getItem('brimos_forks') || '[]')).length,
+    echoes: (JSON.parse(localStorage.getItem('brimos_echoes') || '[]')).length,
+    trail: (JSON.parse(localStorage.getItem('brimos_trail') || '[]')).length,
+    beacons: localStorage.getItem('brimos_beacon') ? 1 : 0,
+    capsules: localStorage.getItem('brimos_capsule_exported') ? 1 : 0
+  };
+}
+const p = getStats();
+const out = Object.entries(p).map(([k, v]) => `${k}: ${v}`).join('\n');
+document.getElementById('prolif').innerText = out;
+</script>
+</body></html>
