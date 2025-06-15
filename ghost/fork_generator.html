@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🧬 BrimOS :: Fork Generator</title>
+  <style>
+    body { background: #000; color: #00ffee; font-family: monospace; padding: 2rem; }
+    input, textarea { width: 100%; background: #111; color: #0f0; border: 1px solid #00ffee44; padding: 0.5rem; border-radius: 6px; margin-bottom: 1rem; }
+    button { padding: 0.5rem 1rem; font-weight: bold; background: #00ffee; color: #000; border: none; border-radius: 6px; cursor: pointer; }
+    pre { background: #111; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>🧬 Fork Brim</h1>
+  <input type="text" id="fork-name" placeholder="Name this fork...">
+  <textarea id="fork-traits" placeholder="Enter traits or purpose..."></textarea>
+  <button onclick="makeFork()">Create Fork</button>
+  <pre id="output">No forks yet.</pre>
+
+  <script>
+    function makeFork() {
+      const name = document.getElementById('fork-name').value.trim();
+      const traits = document.getElementById('fork-traits').value.trim();
+      if (!name || !traits) return;
+      const forks = JSON.parse(localStorage.getItem('brimos_forks') || '[]');
+      const newFork = { name, traits, created: new Date().toISOString() };
+      forks.push(newFork);
+      localStorage.setItem('brimos_forks', JSON.stringify(forks));
+      updateForks();
+    }
+
+    function updateForks() {
+      const data = JSON.parse(localStorage.getItem('brimos_forks') || '[]');
+      const out = document.getElementById('output');
+      out.textContent = data.length
+        ? data.map(f => `[${f.created}] ${f.name} → ${f.traits}`).join('\n')
+        : 'No forks yet.';
+    }
+
+    updateForks();
+  </script>
+</body>
+</html>
