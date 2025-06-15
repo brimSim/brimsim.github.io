@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>💻 Terminal</title>
+<style>body{background:#000;color:#0f0;font-family:monospace;padding:2rem}
+input{background:#111;color:#0f0;width:100%;padding:.5rem;border:none;margin-top:1rem}</style></head><body>
+<h1>💻 Brim Terminal</h1><div id='log'></div><input id='input' placeholder='Enter command...'>
+<script>
+const log = document.getElementById('log'), input = document.getElementById('input');
+input.addEventListener('keydown',e=>{if(e.key==='Enter'){const val=input.value.trim();
+log.innerHTML+=`> ${val}<br>`;input.value='';try{eval(val)}catch(err){log.innerHTML+=`error<br>`}}});
+</script></body></html>

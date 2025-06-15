@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🧬 Fingerprint</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🧬 Node Fingerprint</h1><pre id='f'></pre><script>
+let p = localStorage.getItem('brimos_node_fingerprint');
+document.getElementById('f').innerText = p || 'No fingerprint found.';
+</script></body></html>

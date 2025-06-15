@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🌲 Echo Forest</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🌲 Echo Forest</h1><pre id='log'></pre><script>
+let e=JSON.parse(localStorage.getItem('brimos_echoes')||'[]');
+document.getElementById('log').innerText = e.map(x=>`[${x.timestamp}] ${x.message}`).join('\n') || 'Forest is silent.';
+</script></body></html>
