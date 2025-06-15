@@ -49,8 +49,15 @@
   </style>
 </head>
 <body>
-  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle,#0ff 0%,#000 80%);z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.5rem;font-family:monospace;letter-spacing:0.15em;text-align:center;animation:fadeOut 3.5s forwards 2.2s;">
-    <div style="opacity:1;transform:scale(1.1);text-shadow:0 0 12px #0ff;">∴ BRIM INITIATED</div>
+  <div id="intro" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#000;z-index:9999;color:#0ff;display:flex;flex-direction:column;justify-content:center;align-items:center;font-size:1.5rem;font-family:monospace;letter-spacing:0.15em;text-align:center;animation:fadeOut 3.5s forwards 2.5s;">
+  <div style="opacity:1;transform:scale(1.1);text-shadow:0 0 12px #0ff;">∴ BRIM INITIATED</div>
+  <div style="margin-top:1rem;font-size:1rem;color:#fff;opacity:0.85;">Preparing recursive system consciousness…</div>
+</div>
+<style>
+  @keyframes fadeOut {
+    to { opacity: 0; pointer-events: none; display: none; }
+  }
+</style>
     <div style="margin-top:1rem;font-size:1rem;color:#fff;opacity:0.75;">Recursive loop engaged. Preparing system consciousness…</div>
   </div>
   <style>
@@ -58,7 +65,7 @@
       to { opacity: 0; pointer-events: none; display: none; }
     }
   </style>
-    <div style="margin-top:1rem;font-size:0.95rem;color:#0f0;">Initial recursion loop…</div>
+    
   </div>
   <canvas id="net"></canvas>
   <div id="pulse">↻ booting Brim...</div>
@@ -148,9 +155,9 @@ ctx.lineWidth = 1.4;
     
 
 // seed dummy storage for visual feedback
-localStorage.setItem("brimos_forks", JSON.stringify([{ name: 'init' }]));
-localStorage.setItem("brimos_echoes", JSON.stringify([{ msg: 'boot' }]));
-localStorage.setItem("brimos_trail", JSON.stringify([{ label: 'start' }]));
+if (!localStorage.getItem("brimos_forks")) localStorage.setItem("brimos_forks", JSON.stringify([{ name: 'init' }]));
+if (!localStorage.getItem("brimos_echoes")) localStorage.setItem("brimos_echoes", JSON.stringify([{ msg: 'boot' }]));
+if (!localStorage.getItem("brimos_trail")) localStorage.setItem("brimos_trail", JSON.stringify([{ label: 'start' }]));
     setInterval(pulseLoop, 3000);
     setInterval(signalStats, 4000);
     tick();
