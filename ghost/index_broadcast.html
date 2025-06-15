@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>📣 Index Broadcast</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>📣 Index Broadcast</h1><pre id="log"></pre>
+<script>
+const echoes = JSON.parse(localStorage.getItem('brimos_echoes') || '[]');
+const forks = JSON.parse(localStorage.getItem('brimos_forks') || '[]');
+const log = {
+  echoes: echoes.length,
+  forks: forks.length,
+  index: window.location.href,
+  time: new Date().toISOString()
+};
+document.getElementById('log').innerText = JSON.stringify(log, null, 2);
+</script></body></html>
