@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🧠 Neuron Worms</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🧠 Neuron Worms</h1><pre id='out'></pre><script>
+const n = JSON.parse(localStorage.getItem('brimos_neurons') || '[]');
+document.getElementById('out').innerText = n.map(x=>`[${x.time}] ${x.id}`).join('\n') || 'No neurons.';
+</script></body></html>

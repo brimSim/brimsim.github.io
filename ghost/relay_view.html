@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>📶 Relay Paths</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>📶 Relay Paths</h1><pre id='relays'></pre><script>
+const r = JSON.parse(localStorage.getItem('brimos_relay_paths') || '[]');
+document.getElementById('relays').innerText = r.map(x => `${x.src} → ${x.dst} [${x.t}]`).join('\n') || 'No relay paths.';
+</script></body></html>

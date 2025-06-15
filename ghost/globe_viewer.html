@@ -1,0 +1,6 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🌀 Signal Globes</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}</style></head>
+<body><h1>🌀 Signal Globes</h1><pre id='pulses'></pre><script>
+const p = JSON.parse(localStorage.getItem('brimos_globes') || '[]');
+document.getElementById('pulses').innerText = p.map(x => `[${x.time}] ${x.label} (${x.intensity})`).join('\n') || 'No signals.';
+</script></body></html>
