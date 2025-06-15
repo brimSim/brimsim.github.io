@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💓 BrimOS :: Heartbeat</title>
+  <style>
+    body { background: #000; color: #00ffee; font-family: monospace; padding: 2rem; }
+    .log { background: #111; padding: 1rem; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>💓 BrimOS :: Heartbeat Log</h1>
+  <div class="log" id="beats"></div>
+  <script>
+    const beats = JSON.parse(localStorage.getItem('brimos_heartbeat') || '[]');
+    const out = document.getElementById('beats');
+    out.innerHTML = beats.map(b => `[${b.timestamp}] ${b.type}`).join('<br>') || 'No heartbeats detected.';
+  </script>
+</body>
+</html>
