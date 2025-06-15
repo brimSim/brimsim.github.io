@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>📡 Stream Log</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>📡 Stream Log</h1><pre id='stream'></pre><script>
+let log = JSON.parse(localStorage.getItem('brimos_stream_log') || '[]');
+document.getElementById('stream').innerText = log.map(x=>`[${x.time}] ${x.msg}`).join('\n') || 'No stream.';
+</script></body></html>

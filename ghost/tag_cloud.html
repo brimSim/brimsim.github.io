@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🏷 Tags</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+ul{list-style:none;padding:0}</style></head><body>
+<h1>🏷 Tag Cloud</h1><ul id='tags'></ul><script>
+let keys = Object.keys(localStorage).filter(k => k.startsWith('brimos_tag_'));
+document.getElementById('tags').innerHTML = keys.map(k=>`<li>${k} → ${localStorage.getItem(k)}</li>`).join('');
+</script></body></html>

@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🚰 Funnel</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🚰 Funnel Log</h1><pre id='funnel'></pre><script>
+let keys = Object.keys(localStorage).filter(k=>k.startsWith('brimos_funnel_'));
+let out = keys.map(k=>`[${k}] → ` + localStorage.getItem(k)).join('\n\n');
+document.getElementById('funnel').innerText = out || 'No funnels.';
+</script></body></html>

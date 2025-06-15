@@ -1,0 +1,7 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🔐 Encrypted Echo</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🔐 Encrypted Echo</h1><pre id='view'></pre><script>
+let e = localStorage.getItem('brimos_encrypted_echo');
+document.getElementById('view').innerText = e || 'No encrypted echo.';
+</script></body></html>
