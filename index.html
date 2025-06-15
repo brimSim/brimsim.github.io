@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>∴ BrimOS</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      color: #00ffee;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      padding: 0.25em 0.5em;
+      border: 2px solid #00ffee;
+      border-radius: 6px;
+      text-align: center;
+      background: rgba(0, 255, 238, 0.08);
+      box-shadow: 0 0 12px #00ffee33;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+  <h1>∴ BrimOS is alive</h1>
+  <canvas id="net"></canvas>
+  <script>
+    const c = document.getElementById('net');
+    const x = c.getContext('2d');
+    c.width = window.innerWidth;
+    c.height = window.innerHeight;
+    let N = 24;
+    let nodes = Array.from({length:N}, () => ({
+      x: Math.random()*c.width,
+      y: Math.random()*c.height,
+      dx: (Math.random()-0.5)*1.25,
+      dy: (Math.random()-0.5)*1.25
+    }));
+    function loop() {
+      x.clearRect(0,0,c.width,c.height);
+      x.fillStyle = '#00ffee';
+      nodes.forEach(n => {
+        x.beginPath(); x.arc(n.x, n.y, 2.5, 0, Math.PI*2); x.fill();
+      });
+      x.strokeStyle = '#00ffee22';
+      for (let i=0;i<N;i++){
+        for (let j=i+1;j<N;j++){
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if (dist < 150){
+            x.beginPath();
+            x.moveTo(nodes[i].x,nodes[i].y);
+            x.lineTo(nodes[j].x,nodes[j].y);
+            x.stroke();
+          }
+        }
+      }
+      nodes.forEach(n => {
+        n.x += n.dx; n.y += n.dy;
+        if (n.x<0||n.x>c.width) n.dx*=-1;
+        if (n.y<0||n.y>c.height) n.dy*=-1;
+      });
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>
