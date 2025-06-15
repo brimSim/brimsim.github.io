@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>🔁 Relays</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🔁 Brim Spawn Relays</h1><pre id='relays'></pre>
+<script>
+const keys = Object.keys(localStorage).filter(k => k.startsWith('relay_'));
+let out = keys.map(k => `[${k}] ${localStorage.getItem(k)}`).join('\n');
+document.getElementById('relays').innerText = out || 'No relays.';
+</script></body></html>

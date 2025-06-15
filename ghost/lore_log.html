@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>📜 Lore Log</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>📜 Brim Lore Log</h1><pre id='log'></pre>
+<script>
+const events = JSON.parse(localStorage.getItem('brimos_trail') || '[]');
+document.getElementById('log').innerText = events.slice(-15).map(e => `[${e.timestamp}] ${e.label}`).join('\n') || 'No lore yet.';
+</script></body></html>
