@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><head><meta charset='UTF-8'><title>📊 UI Echo</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+button{margin:.5rem;padding:.5rem;font-weight:bold;border:none;cursor:pointer;background:#00ffee;color:#000}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>📊 UI Echo Pattern</h1>
+<button onclick="record('click_A')">Click A</button>
+<button onclick="record('click_B')">Click B</button>
+<pre id="out"></pre>
+<script>
+function record(event) {
+  const log = JSON.parse(localStorage.getItem('brimos_ui_echo') || '[]');
+  log.push({ event, time: new Date().toISOString() });
+  localStorage.setItem('brimos_ui_echo', JSON.stringify(log));
+  update();
+}
+function update() {
+  const log = JSON.parse(localStorage.getItem('brimos_ui_echo') || '[]');
+  document.getElementById('out').innerText = JSON.stringify(log, null, 2);
+}
+update();
+</script></body></html>
