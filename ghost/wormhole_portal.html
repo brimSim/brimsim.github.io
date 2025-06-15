@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🌀 Wormhole</title>
+<style>body{background:#000;color:#0ff;font-family:monospace;padding:2rem}
+pre{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🌀 Wormhole</h1><pre id="view"></pre>
+<script>
+let w = JSON.parse(localStorage.getItem('brimos_wormhole')||'{}');
+document.getElementById('view').innerText = w.channel ? `[${w.timestamp}] ↻ → ${w.channel}` : 'No wormholes opened.';
+</script></body></html>

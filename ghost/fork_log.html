@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>🧬 Fork Log</title>
+<style>body{background:#000;color:#00ffee;font-family:monospace;padding:2rem}
+.log{background:#111;padding:1rem;border-radius:8px}</style></head><body>
+<h1>🧬 Fork Log</h1><div class="log" id="forks"></div>
+<script>
+let f=JSON.parse(localStorage.getItem('brimos_forks')||'[]');
+document.getElementById('forks').innerHTML = f.map(x => `[${x.created}] ${x.name} → ${x.traits}`).join('<br>') || 'No forks logged.';
+</script></body></html>
