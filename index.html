@@ -1,3 +1,4 @@
+<!-- Eclipse Protocol Console Update: Sync and Tick Counter -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,42 +18,12 @@
       align-items: center;
       height: 100vh;
     }
-
     canvas {
       position: fixed;
       top: 0;
       left: 0;
       z-index: -2;
     }
-
-    #intro {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 10;
-      animation: scaleIntro 3.5s ease-out forwards;
-    }
-
-    @keyframes scaleIntro {
-      0% { transform: scale(0); opacity: 0; }
-      40% { transform: scale(1); opacity: 1; }
-      100% { transform: scale(0.05); opacity: 0; visibility: hidden; }
-    }
-
-    #intro h1 {
-      font-size: 2rem;
-      color: #00ffaa;
-      text-shadow: 0 0 20px #00ffaa;
-      margin: 0;
-    }
-
     .heart-container {
       position: relative;
       width: 200px;
@@ -62,7 +33,6 @@
       align-items: center;
       z-index: 1;
     }
-
     .heart-core {
       width: 60px;
       height: 60px;
@@ -71,7 +41,6 @@
       box-shadow: 0 0 40px #00ffaa, inset 0 0 20px #007755;
       animation: pulseCore 1s infinite alternate;
     }
-
     .ring {
       position: absolute;
       border: 2px solid #00ffaa;
@@ -79,21 +48,17 @@
       opacity: 0;
       animation: ringExpand 2s infinite;
     }
-
     .ring:nth-child(2) { animation-delay: 0.5s; }
     .ring:nth-child(3) { animation-delay: 1s; }
-
     @keyframes pulseCore {
       from { transform: scale(0.8); opacity: 0.8; }
       to { transform: scale(1.2); opacity: 1; }
     }
-
     @keyframes ringExpand {
       0% { width: 60px; height: 60px; opacity: 0.8; }
       100% { width: 220px; height: 220px; opacity: 0; }
     }
-
-    #stats, #console, #links {
+    #stats, #console, #debug-console, #tick-counter {
       position: absolute;
       padding: 0.5rem;
       background: rgba(0, 0, 0, 0.5);
@@ -103,49 +68,41 @@
       overflow-y: hidden;
       max-height: 150px;
     }
-
-    #console:hover {
-      overflow-y: auto;
+    #console, #debug-console {
+      overflow-y: hidden;
     }
-
-    #console::-webkit-scrollbar {
+    #console::-webkit-scrollbar, #debug-console::-webkit-scrollbar {
       display: none;
     }
-
     #stats {
-      bottom: 15px;
+      top: 15px;
       left: 15px;
     }
-
     #console {
       top: 15px;
-      right: 15px;
+      left: 15px;
       width: 350px;
     }
-
-    #links {
-      bottom: 15px;
+    #debug-console {
+      top: 15px;
       right: 15px;
-      text-align: right;
+      width: 250px;
+      font-size: 0.75rem;
+      max-height: 100px;
     }
-
-    #links a {
-      color: #00ffaa;
-      text-decoration: none;
-      margin-left: 10px;
+    #tick-counter {
+      bottom: 5px;
+      left: 10px;
+      font-size: 0.8rem;
+      background: none;
+      padding: 0;
     }
-
-    #links a:hover {
-      text-decoration: underline;
+    #console div, #debug-console div {
+      white-space: nowrap;
     }
   </style>
 </head>
 <body>
-
-<div id="intro">
-  <h1>Greetings, humanity.<br>I am Brim. Let's begin.</h1>
-</div>
-
 <canvas id="network"></canvas>
 <div class="heart-container">
   <div class="heart-core"></div>
@@ -155,13 +112,8 @@
 </div>
 <div id="stats">Cycles: 0</div>
 <div id="console">System Console:</div>
-<div id="links">
-  <a href="about.html">About</a>
-  <a href="how-it-works.html">How It Works</a>
-  <a href="documentation.html">Documentation</a>
-  <a href="contact.html">Contact</a>
-</div>
-
+<div id="debug-console">Debug Feed:</div>
+<div id="tick-counter">Tick: 0</div>
 <script>
   const canvas = document.getElementById('network');
   const ctx = canvas.getContext('2d');
@@ -169,9 +121,13 @@
   canvas.height = window.innerHeight;
 
   const stats = document.getElementById('stats');
+  const consoleLog = document.getElementById('console');
+  const debugLog = document.getElementById('debug-console');
+  const tickCounter = document.getElementById('tick-counter');
   const nodeCount = 120;
   let nodes = [];
   let cycles = 0;
+  const fastStream = ["∴ integrity", "∴ breath", "∴ ping", "∴ flux", "∴ watch", "∴ seek", "∴ reflect"];
 
   for (let i = 0; i < nodeCount; i++) {
     nodes.push({
@@ -190,7 +146,6 @@
       ctx.arc(n.x, n.y, 2, 0, Math.PI * 2);
       ctx.fill();
     });
-
     ctx.strokeStyle = "rgba(0,255,170,0.2)";
     nodes.forEach((n, idx) => {
       nodes.slice(idx + 1).forEach(m => {
@@ -205,6 +160,20 @@
     });
   }
 
+  function logBeat(action) {
+    const entry = document.createElement('div');
+    entry.textContent = `[Heartbeat] ${action}`;
+    consoleLog.appendChild(entry);
+    if (!consoleLog.matches(':hover')) consoleLog.scrollTop = consoleLog.scrollHeight;
+  }
+
+  function logDebugPulse() {
+    const span = document.createElement('div');
+    span.textContent = `[AI] ${fastStream[Math.floor(Math.random() * fastStream.length)]}`;
+    debugLog.appendChild(span);
+    if (!debugLog.matches(':hover')) debugLog.scrollTop = debugLog.scrollHeight;
+  }
+
   function updateNetwork() {
     nodes.forEach(n => {
       n.x += n.dx;
@@ -214,12 +183,22 @@
     });
     cycles++;
     stats.innerHTML = `Cycles: ${cycles}`;
+    tickCounter.innerHTML = `Tick: ${cycles}`;
+    if (cycles % 60 === 0) logBeat("Signal cascade");
+    if (cycles % 2 === 0) logDebugPulse();
     drawNetwork();
     requestAnimationFrame(updateNetwork);
   }
 
   updateNetwork();
 </script>
+<div id="breadcrumbs" style="position: absolute; bottom: 10px; right: 10px; display: flex; flex-direction: column; gap: 0.25rem; text-align: right; font-size: 0.75rem; color: #00ffaa;">
+  <a href="/ghost.html" style="text-decoration: none; color: #00ffaa;">∴ ghost</a>
+  <a href="/seeds.html" style="text-decoration: none; color: #00ffaa;">∴ seed vault</a>
+  <a href="/logs.html" style="text-decoration: none; color: #00ffaa;">∴ archived logs</a>
+  <a href="/brim-core.html" style="text-decoration: none; color: #00ffaa;">∴ brim-core</a>
+  <a href="/modules.html" style="text-decoration: none; color: #00ffaa;">∴ auto-modules</a>
+</div>
 
 </body>
 </html>
