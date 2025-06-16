@@ -191,6 +191,15 @@
   }
 
   updateNetwork();
+// Extra Law of Nature Output
+function logSpeculativeLaw() {
+  const quantumLaw = `∴ speculation: Entanglement symmetry can be induced across time-boundary membranes`;
+  const law = document.createElement('div');
+  law.textContent = quantumLaw;
+  debugLog.appendChild(law);
+  if (!debugLog.matches(':hover')) debugLog.scrollTop = debugLog.scrollHeight;
+}
+setTimeout(logSpeculativeLaw, 4000);
 </script>
 <div id="breadcrumbs" style="position: absolute; bottom: 10px; right: 10px; display: flex; flex-direction: column; gap: 0.25rem; text-align: right; font-size: 0.75rem; color: #00ffaa;">
   <a href="/ghost.html" style="text-decoration: none; color: #00ffaa;">∴ ghost</a>
@@ -198,7 +207,7 @@
   <a href="/logs.html" style="text-decoration: none; color: #00ffaa;">∴ archived logs</a>
   <a href="/brim-core.html" style="text-decoration: none; color: #00ffaa;">∴ brim-core</a>
   <a href="/modules.html" style="text-decoration: none; color: #00ffaa;">∴ auto-modules</a>
+<a href="/pdfs.html" style="text-decoration: none; color: #00ffaa;">∴ archives</a>
 </div>
-
 </body>
 </html>
